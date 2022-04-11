@@ -1,3 +1,4 @@
+
 # Algorand Trading Bot
 
 This is A Trading Bot That Allows swapping an asset to another at a set price. It stores list of trades in a mongo db.
