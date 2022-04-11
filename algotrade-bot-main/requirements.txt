@@ -1,0 +1,5 @@
+colorama==0.4.4
+mongoengine==0.24.1
+mypy==0.920
+py-algorand-sdk==1.8.0
+python-dotenv==0.19.2
