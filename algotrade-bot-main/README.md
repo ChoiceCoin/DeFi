@@ -1,10 +1,4 @@
 
-# First
-
-# DeFi
-# Repository for Choice Coin DeFi.
-#Readme
-
 # Algorand Trading Bot
 
 This is A Trading Bot That Allows swapping an asset to another at a set price. It stores list of trades in a mongo db.
@@ -28,7 +22,6 @@ Set up venv (one time):
 Active venv:
 
 - `. venv/bin/activate` (if your shell is bash/zsh)
-
 - `. venv/bin/activate.fish` (if your shell is fish)
 
 Install dependencies:
@@ -46,7 +39,6 @@ Mongo DB has to be installed on your system, this stores the trades and assets. 
 This bot is implemented to make use of an off-chain MongoDB database that currently contains two tables:
 
 - The `assets` table holds token identification details of the Algorand native token and Algorand Standard Assets (ASAs) that can be traded with the bot.
-
 - The `trades` table is where the bot looks for trade requests you want performed on behalf of your Algorand wallet.
 
 Schema definitions for these tables can be found in the file [db/models.py](./db/models.py).
@@ -56,35 +48,21 @@ To Create An Asset and Trade, Visit the [populate.py](./populate.py) File For Co
 ## Model Schema Definition
 
 ```
-
 class Asset:
-
     name: "name of the asset"
-
     asset_id: "asa id e.g(0) for Algorand"
-
     network: "mainnet" or "testnet"
 
 class Trade:
-
     wallet_address: "Algorand Wallet Address of The Trade Executor"
-
     asset1: Asset object (e.g Asset(name="Algorand"))
-
     asset2: Asset objects
-
     asset_in: Asset To swap
-
     asset_in_amt: Amount of Asset In To Swap
-
     slippage: TinyMan Slippage
-
     min_sell_price: Minimum Price to sell Asset for e.g (Sell choice for Algo for at least 0.003 Algo Per choice)
-
     do_redeem: Boolean for redeeming excess assets
-
     network: "mainnet" or "testnet"
-
 ```
 
 ## Environment Variables
@@ -96,28 +74,18 @@ There are environment variables that need to be properly configured for the bot 
 To Run the bot, edit the `Bot` object in the [main.py](./main.py) file and run `python main.py`.
 
 ### Sample Code To Run Bot
-
 ```
-
 import os
-
 from bot import Bot, Account
-
 from algosdk import mnemonic
-
 from dotenv import load_dotenv
-
 load_dotenv()
 
 address = os.getenv("ADDRESS") #Address In ENV File
-
 key = mnemonic.to_private_key(os.getenv("KEY")) #Mnemonic In ENV File
 
 account = Account(address, key)
-
 bot = Bot(account, "mainnet", 5) #Run Bot On MainNet With 5 seconds interval
-
 bot.run()
-
 ```
 
