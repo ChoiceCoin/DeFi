@@ -1,0 +1,8 @@
+algofi-amm-py-sdk @ git+https://github.com/Algofiorg/algofi-amm-py-sdk@08c8fed833805749c4a641d06f10ac080291ceb5
+cffi==1.15.0
+msgpack==1.0.3
+py-algorand-sdk==1.11.0
+pycparser==2.21
+pycryptodomex==3.14.1
+PyNaCl==1.5.0
+python-dotenv==0.20.0
