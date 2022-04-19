@@ -8,7 +8,7 @@ from algofi_amm.utils import get_payment_txn, get_params, send_and_wait
 
 myMnemonic = ""
 sender = mnemonic.to_public_key(myMnemonic)
-key =  mnemonic.to_private_key(myMnemonic)
+key = mnemonic.to_private_key(myMnemonic)
 
 algod_address = "http://127.0.0.1:4001"
 algod_token = "a" * 64
@@ -36,11 +36,12 @@ stbl_pool = amm_client.get_pool(PoolType.CONSTANT_PRODUCT_30BP_FEE, STBL_ID, ALG
 pair_pool = amm_client.get_pool(PoolType.CONSTANT_PRODUCT_30BP_FEE, STBL_ID, USDC_ID)
 usdc_pool = amm_client.get_pool(PoolType.CONSTANT_PRODUCT_30BP_FEE, USDC_ID, ALGO_ID)
 
-# USDc pool has biggest algo reserve 
+# USDc pool has biggest algo reserve
 flash_loan_pool = usdc_pool
 
 # Max loanable  amount
-max_input_amount = flash_loan_pool.asset1_balance // 10 
+max_input_amount = flash_loan_pool.asset1_balance // 10
+
 
 def tryMakeProfit(pool1: Pool, pool2: Pool, pool3: Pool, input_amount: int):
 
@@ -54,10 +55,10 @@ def tryMakeProfit(pool1: Pool, pool2: Pool, pool3: Pool, input_amount: int):
         quotes.append(pool3.get_swap_exact_for_quote(pool3.asset2.asset_id, quotes[1].asset2_delta))
 
     # Transaction fees for 3 swaps and a flash loan + flash loan pool fee
-    swap_fees = 12000 + (input_amount // 1000) 
-    
+    swap_fees = 12000 + (input_amount // 1000)
+
     # Make sure the profit outweighs the fees
-    if (quotes[2].asset1_delta + quotes[0].asset1_delta) > swap_fees: 
+    if (quotes[2].asset1_delta + quotes[0].asset1_delta) > swap_fees:
 
         # Assemble transactions from quotes
         txnGroup = pool1.get_swap_exact_for_txns(sender, ALGO, -quotes[0].asset1_delta, quotes[0].asset2_delta)
@@ -71,8 +72,8 @@ def tryMakeProfit(pool1: Pool, pool2: Pool, pool3: Pool, input_amount: int):
         flash_txns = flash_loan_pool.get_flash_loan_txns(sender, ALGO, input_amount + swap_fees, txnGroup)
 
         flash_txns.sign_with_private_key(sender, key)
-       
-        # Submit and hope no one beats you to it 
+
+        # Submit and hope no one beats you to it
         try:
             flash_txns.submit(amm_client.algod, wait=True)
         except Exception as ex:
@@ -81,6 +82,7 @@ def tryMakeProfit(pool1: Pool, pool2: Pool, pool3: Pool, input_amount: int):
     else:
         print("Not currently profitable")
 
-# Try swapping the usdc and stbl pool and change the input value to get different opportunities 
+
+# Try swapping the usdc and stbl pool and change the input value to get different opportunities
 tryMakeProfit(usdc_pool, pair_pool, stbl_pool, 20228200)
 # Successful testnet group txn GmOCCn8RZ2gTihmWGZcmB6NQi6N//phZ86S65oPEQ3s=
