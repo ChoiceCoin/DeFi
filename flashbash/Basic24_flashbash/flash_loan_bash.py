@@ -1,7 +1,6 @@
 
 # 1. Import the necessary modules and Algofi Client for Mainnet
 import os
-from dotenv import dotenv_values
 from algosdk import mnemonic
 from algofi_amm.v0.asset import Asset
 from algofi_amm.v0.client import AlgofiAMMTestnetClient, AlgofiAMMMainnetClient
