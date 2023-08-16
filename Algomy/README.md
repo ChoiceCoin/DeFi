@@ -37,11 +37,9 @@ In its initial iteration, Algomy predicts the price of the Algorand native asset
 - Edit the number of Epochs and drop-out rate as neccescary. Look at the *ALGO_Prediction.py* file under *Final_Deliverables* for more details.
 - You should recieve several outputs through PyPlot: a graph of ALGO's past volatility, a prediction of future ALGO Volatility, and a graph detailing predictions of Algorand's future price.
 
-# Demo
-YouTube: https://www.youtube.com/watch?v=uc9HyV-7dzE
 
 # Software License
-Copyright Fortior Blockchain, LLLP 2021 
+Copyright Fortior Blockchain, LP 2021 
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
